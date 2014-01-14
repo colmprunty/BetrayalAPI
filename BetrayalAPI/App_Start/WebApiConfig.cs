@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using System.Web.Http;
+using System.Web.Http.ValueProviders;
 using Raven.Client.Embedded;
 
 namespace BetrayalAPI
@@ -10,7 +11,7 @@ namespace BetrayalAPI
 
         public static void Register(HttpConfiguration config)
         {
-            // Web API routes
+            config.EnableCors();
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -21,6 +22,7 @@ namespace BetrayalAPI
 
             var appXmlType = config.Formatters.XmlFormatter.SupportedMediaTypes.FirstOrDefault(t => t.MediaType == "application/xml");
             config.Formatters.XmlFormatter.SupportedMediaTypes.Remove(appXmlType);
+                
 
             DocumentStore = new EmbeddableDocumentStore
             {

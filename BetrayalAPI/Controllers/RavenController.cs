@@ -3,10 +3,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Controllers;
+using System.Web.Http.Cors;
 using Raven.Client;
 
 namespace BetrayalAPI.Controllers
 {
+    [EnableCors(origins: "http://localhost:5454", headers: "*", methods: "*")]
     public class RavenController : ApiController
     {
         public IDocumentSession Session { get; set; }
