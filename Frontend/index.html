@@ -3,6 +3,12 @@
 <body ng-app="BetrayalApp">
 	<div ng-controller="BetrayalController">
 		<button ng-click="reset()">Reset This Whole Mess</button>
+		<button ng-click="loadCharacters()">Load</button>
+		<ul>
+			<li ng-repeat="character in characters">
+				{{ character.Name }}
+			</li>
+		</ul>
 	</div>
 <script src="angular.js"></script>
 <script src="angular-route.js"></script>
