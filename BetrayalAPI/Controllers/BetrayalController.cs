@@ -1,27 +1,13 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http.Cors;
+﻿using System.Web.Http.Cors;
 using BetrayalAPI.Models;
 
 namespace BetrayalAPI.Controllers
 {
     [EnableCors(origins: "http://localhost:5454", headers: "*", methods: "*")]
-    public class BetrayalController : RavenController
+    public class BetrayalController : BaseController
     {
-        public List<Character> GetCharacters()
-        {
-            return Session.Query<Character>().ToList();
-        } 
-
         public void Reset()
         {
-            foreach (var character in Session.Query<Character>())
-            {
-                Session.Delete(character);
-            }
-
-            Session.SaveChanges();
-
             var ox = new Character
                      {
                          Id = 1,
@@ -35,9 +21,7 @@ namespace BetrayalAPI.Controllers
                          CurrentSpeed = 5,
                          Name = "Ox Bellows",
                      };
-
-            Session.Store(ox);
-
+            
             var flash = new Character
             {
                 Id = 2,
@@ -51,8 +35,6 @@ namespace BetrayalAPI.Controllers
                 CurrentSpeed = 5,
                 Name = "Darrin 'Flash' Williams",
             };
-
-            Session.Store(flash);
         }
     }
 }

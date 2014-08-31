@@ -1,17 +1,32 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Web;
 using System.Web.Http;
-using System.Web.Routing;
+using BetrayalAPI.ActionFilters;
+using BetrayalAPI.Models;
+using FluentNHibernate.Cfg;
+using FluentNHibernate.Cfg.Db;
+using NHibernate;
 
 namespace BetrayalAPI
 {
-    public class WebApiApplication : System.Web.HttpApplication
+    public class WebApiApplication : HttpApplication
     {
+        public static ISessionFactory SessionFactory { get; private set; }
+
+        private void InitializeSessionFactory()
+        {
+            SessionFactory = Fluently.Configure()
+            .Database(MsSqlConfiguration
+            .MsSql2012
+            .ConnectionString(c => c.FromConnectionStringWithKey("OfflineConnectionString")))
+                .Mappings(m => m.FluentMappings
+                .AddFromAssemblyOf<CharacterMap>())
+            .BuildSessionFactory();
+        }
+
         protected void Application_Start()
         {
-            GlobalConfiguration.Configure(WebApiConfig.Register);
+            InitializeSessionFactory();
+            GlobalConfiguration.Configuration.Filters.Add(new NhSessionManagementAttribute());
         }
     }
 }

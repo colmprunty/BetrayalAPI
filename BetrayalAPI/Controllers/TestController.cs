@@ -9,7 +9,7 @@ namespace BetrayalAPI.Controllers
     {
         public HttpResponseMessage Get()
         {
-            return new HttpResponseMessage()
+            return new HttpResponseMessage
             {
                 Content = new StringContent("GET: Test message")
             };
@@ -17,7 +17,7 @@ namespace BetrayalAPI.Controllers
 
         public HttpResponseMessage Post()
         {
-            return new HttpResponseMessage()
+            return new HttpResponseMessage
             {
                 Content = new StringContent("POST: Test message")
             };
@@ -25,7 +25,7 @@ namespace BetrayalAPI.Controllers
 
         public HttpResponseMessage Put()
         {
-            return new HttpResponseMessage()
+            return new HttpResponseMessage
             {
                 Content = new StringContent("PUT: Test message")
             };

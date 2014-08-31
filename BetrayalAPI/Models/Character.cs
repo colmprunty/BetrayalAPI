@@ -2,17 +2,17 @@
 {
     public class Character
     {
-        public string Name { get; set; }
-        public int[] Speed { get; set; }
-        public int CurrentSpeed { get; set; }
-        public int[] Might { get; set; }
-        public int CurrentMight { get; set; }
-        public int[] Sanity { get; set; }
-        public int CurrentSanity { get; set; }
-        public int[] Knowledge { get; set; }
-        public int CurrentKnowledge { get; set; }
-        public bool InUse { get; set; }
-        public string InUseBy { get; set; }
-        public int Id { get; set; }
+        public virtual string Name { get; set; }
+        public virtual int[] Speed { get; set; }
+        public virtual int CurrentSpeed { get; set; }
+        public virtual int[] Might { get; set; }
+        public virtual int CurrentMight { get; set; }
+        public virtual int[] Sanity { get; set; }
+        public virtual int CurrentSanity { get; set; }
+        public virtual int[] Knowledge { get; set; }
+        public virtual int CurrentKnowledge { get; set; }
+        public virtual bool InUse { get; set; }
+        public virtual string InUseBy { get; set; }
+        public virtual int Id { get; set; }
     }
 }
