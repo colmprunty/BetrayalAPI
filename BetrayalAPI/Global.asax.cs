@@ -1,10 +1,14 @@
 ﻿using System.Web;
 using System.Web.Http;
+using System.Web.Mvc;
+using System.Web.Optimization;
+using System.Web.Routing;
 using BetrayalAPI.ActionFilters;
 using BetrayalAPI.Models;
 using FluentNHibernate.Cfg;
 using FluentNHibernate.Cfg.Db;
 using NHibernate;
+using NHibernate.Context;
 
 namespace BetrayalAPI
 {
@@ -20,11 +24,17 @@ namespace BetrayalAPI
             .ConnectionString(c => c.FromConnectionStringWithKey("OfflineConnectionString")))
                 .Mappings(m => m.FluentMappings
                 .AddFromAssemblyOf<CharacterMap>())
+                .CurrentSessionContext<WebSessionContext>()
             .BuildSessionFactory();
         }
 
         protected void Application_Start()
         {
+            AreaRegistration.RegisterAllAreas();
+            GlobalConfiguration.Configure(WebApiConfig.Register);
+            FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
+            RouteConfig.RegisterRoutes(RouteTable.Routes);
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
             InitializeSessionFactory();
             GlobalConfiguration.Configuration.Filters.Add(new NhSessionManagementAttribute());
         }

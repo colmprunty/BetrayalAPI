@@ -1,11 +1,19 @@
-﻿using System.Web.Http.Cors;
+﻿using System.Web.Http;
+using System.Web.Http.Cors;
+using BetrayalAPI.ActionFilters;
 using BetrayalAPI.Models;
 
 namespace BetrayalAPI.Controllers
 {
     [EnableCors(origins: "http://localhost:5454", headers: "*", methods: "*")]
-    public class BetrayalController : BaseController
+    [NhSessionManagement]
+    public class BetrayalController : ApiController
     {
+        public void GetCharacters()
+        {
+            
+        }
+
         public void Reset()
         {
             var ox = new Character
