@@ -20,15 +20,17 @@ namespace BetrayalAPI.ActionFilters
             CurrentSessionContext.Bind(session);
             session.BeginTransaction();
         }
-
+        
         public override void OnActionExecuted(HttpActionExecutedContext actionExecutedContext)
         {
+            if(!CurrentSessionContext.HasBind(SessionFactory))
+                return;
+
             var session = SessionFactory.GetCurrentSession();
             var transaction = session.Transaction;
             if (transaction != null && transaction.IsActive)
-            {
                 transaction.Commit();
-            }
+            
             session = CurrentSessionContext.Unbind(SessionFactory);
             session.Close();
         }

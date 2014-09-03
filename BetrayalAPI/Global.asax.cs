@@ -19,13 +19,13 @@ namespace BetrayalAPI
         private void InitializeSessionFactory()
         {
             SessionFactory = Fluently.Configure()
-            .Database(MsSqlConfiguration
-            .MsSql2012
-            .ConnectionString(c => c.FromConnectionStringWithKey("OfflineConnectionString")))
+                .Database(MsSqlConfiguration
+                    .MsSql2012
+                    .ConnectionString(c => c.FromConnectionStringWithKey("OfflineConnectionString")))
                 .Mappings(m => m.FluentMappings
-                .AddFromAssemblyOf<CharacterMap>())
+                    .AddFromAssemblyOf<CharacterMap>())
                 .CurrentSessionContext<WebSessionContext>()
-            .BuildSessionFactory();
+                .BuildSessionFactory();
         }
 
         protected void Application_Start()
