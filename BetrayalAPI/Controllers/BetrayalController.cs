@@ -1,24 +1,27 @@
-﻿using System.Web.Http;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Web.Http;
 using System.Web.Http.Cors;
 using System.Web.Mvc;
 using BetrayalAPI.ActionFilters;
 using BetrayalAPI.Models;
 using NHibernate;
+using NHibernate.Linq;
 using NHibernate.Tool.hbm2ddl;
 
 namespace BetrayalAPI.Controllers
 {
     [EnableCors(origins: "http://localhost:5454", headers: "*", methods: "*")]
+    [NhSessionManagement]
     public class BetrayalController : ApiController
     {
-        private readonly ISession _session;
+        private ISession _session;
         
         public BetrayalController()
         {
-            _session = WebApiApplication.SessionFactory.GetCurrentSession();
+            //_session = WebApiApplication.SessionFactory.GetCurrentSession();
         }
 
-        [System.Web.Http.HttpGet]
         public ContentResult CreateDatabase()
         {
             WebApiApplication.GetConfig()
@@ -28,8 +31,17 @@ namespace BetrayalAPI.Controllers
             return new ContentResult { Content = "Hi"};
         }
 
+        [System.Web.Http.HttpGet]
+        public virtual List<Character> GetCharacters()
+        {
+            _session = WebApiApplication.SessionFactory.GetCurrentSession();
+            return _session.Query<Character>().ToList();
+        }
+
+        [System.Web.Http.HttpPost]
         public void Reset()
         {
+            _session = WebApiApplication.SessionFactory.GetCurrentSession();
             var ox = new Character
             {
                 Id = 1,
