@@ -22,5 +22,11 @@ namespace BetrayalAPI.Controllers
             var list = _session.Query<Character>().ToList();
             return list;
         }
+
+        [HttpPost]
+        public virtual void SetCharacter(int id)
+        {
+            
+        }
     }
 }

@@ -4,10 +4,9 @@
 	<div ng-controller="BetrayalController">
 		<button ng-click="reset()">Reset This Whole Mess</button>
 		<button ng-click="loadCharacters()">Load</button>
-		<button ng-click="getEm()">Load For Reals</button>
 		<ul>
 			<li ng-repeat="character in characters">
-				{{ character.Name }}
+				<button ng-click="selectCharacter(character.Id)">{{ character.Name }}</button>
 			</li>
 		</ul>
 	</div>
