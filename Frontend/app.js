@@ -10,9 +10,9 @@ angular.module('BetrayalApp', ['ngRoute'])
 		$http.get('http://localhost:59858/api/betrayal/GetCharacters').success(function(data){			
 			$scope.characters = data;
 		});
-	}
+	};
 
 	$scope.selectCharacter = function(id){
-		$http.post('http://localhost:59858/api/Betrayal/SetCharacter/id');
-	}
+		$http.post('http://localhost:59858/api/betrayal/SetCharacter?id=' + id);
+	};
 });

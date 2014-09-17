@@ -26,7 +26,7 @@ namespace BetrayalAPI.Controllers
         [HttpPost]
         public virtual void SetCharacter(int id)
         {
-            
+
         }
     }
 }
