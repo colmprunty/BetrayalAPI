@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Cors;
+using System.Web.Security;
 using BetrayalAPI.ActionFilters;
 using BetrayalAPI.Models;
 using NHibernate;
@@ -26,7 +27,9 @@ namespace BetrayalAPI.Controllers
         [HttpPost]
         public virtual void SetCharacter(int id)
         {
-
+            _session = WebApiApplication.SessionFactory.GetCurrentSession();
+            var character = _session.Query<Character>().Single(x => x.Id == id);
+            FormsAuthentication.SetAuthCookie(character.Name, true);
         }
     }
 }
